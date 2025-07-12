@@ -171,30 +171,41 @@ const VirtualTryOn: React.FC<VirtualTryOnProps> = ({ glassesImage, adjustments, 
   }, [model, glassesMesh, adjustments]);
 
   const takeScreenshot = async () => {
-    if (!webcamRef.current || !canvasRef.current || !renderer) return;
+    if (!webcamRef.current || !canvasRef.current || !renderer || !model) return;
 
     setIsCapturing(true);
 
     try {
       const video = webcamRef.current.video;
-      if (!video) return;
+      if (!video || video.readyState !== 4) return;
+
+      // Wait for the next frame to ensure everything is rendered
+      await new Promise(resolve => requestAnimationFrame(resolve));
 
       // Create a temporary canvas for combining video and glasses
       const tempCanvas = screenshotCanvasRef.current || document.createElement('canvas');
       const tempCtx = tempCanvas.getContext('2d');
       if (!tempCtx) return;
 
-      // Set canvas size to match video
-      tempCanvas.width = video.videoWidth;
-      tempCanvas.height = video.videoHeight;
+      // Set canvas size to match the display size (not video size)
+      const container = video.parentElement;
+      const displayWidth = container?.clientWidth || video.videoWidth;
+      const displayHeight = container?.clientHeight || video.videoHeight;
+      
+      tempCanvas.width = displayWidth;
+      tempCanvas.height = displayHeight;
+
+      // Calculate scaling factors
+      const scaleX = displayWidth / video.videoWidth;
+      const scaleY = displayHeight / video.videoHeight;
 
       // Draw the video frame (mirrored to match display)
       tempCtx.save();
       tempCtx.scale(-1, 1);
-      tempCtx.drawImage(video, -tempCanvas.width, 0, tempCanvas.width, tempCanvas.height);
+      tempCtx.drawImage(video, -displayWidth, 0, displayWidth, displayHeight);
       tempCtx.restore();
 
-      // Force a render of the Three.js scene
+      // Force a render of the Three.js scene to ensure it's up to date
       if (scene && camera) {
         renderer.render(scene, camera);
       }
@@ -202,8 +213,10 @@ const VirtualTryOn: React.FC<VirtualTryOnProps> = ({ glassesImage, adjustments, 
       // Get the glasses canvas data
       const glassesCanvas = canvasRef.current;
       
-      // Draw the glasses overlay on top of the video
-      tempCtx.drawImage(glassesCanvas, 0, 0, tempCanvas.width, tempCanvas.height);
+      // Draw the glasses overlay on top of the video at the same scale
+      if (glassesCanvas) {
+        tempCtx.drawImage(glassesCanvas, 0, 0, displayWidth, displayHeight);
+      }
 
       const imageData = tempCanvas.toDataURL('image/png', 1.0);
       onScreenshot(imageData);
