@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import { Glasses, Camera, ShoppingBag, Sparkles, Zap, Crown, Settings, Home, Brain, Share2, MessageCircle } from 'lucide-react';
+import React, { useState, useCallback, useEffect } from 'react';
+import { Glasses, Camera, ShoppingBag, Sparkles, Zap, Crown, Settings, Home, Brain, Share2, MessageCircle, User, LogOut } from 'lucide-react';
 import VirtualTryOn from './components/VirtualTryOn';
 import ProductSelector from './components/ProductSelector';
 import GlassesControls from './components/GlassesControls';
@@ -11,9 +11,12 @@ import LandingPage from './components/LandingPage';
 import SocialFeatures from './components/SocialFeatures';
 import AIInsights from './components/AIInsights';
 import Chatbot from './components/Chatbot';
+import Auth from './components/Auth';
+import UserProfile from './components/UserProfile';
 import { glassesProducts } from './data/products';
 import { GlassesProduct, CartItem, GlassesAdjustments } from './types';
 import { motion, AnimatePresence } from 'framer-motion';
+import supabaseService from './services/supabase';
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState<GlassesProduct | null>(null);
@@ -27,10 +30,37 @@ function App() {
   });
   const [screenshotData, setScreenshotData] = useState<string | null>(null);
   const [showScreenshotModal, setShowScreenshotModal] = useState(false);
-  const [activeTab, setActiveTab] = useState<'landing' | 'tryOn' | 'features' | 'premium' | 'social' | 'insights'>('landing');
+  const [activeTab, setActiveTab] = useState<'landing' | 'tryOn' | 'features' | 'premium' | 'social' | 'insights' | 'profile'>('landing');
   const [isPremium, setIsPremium] = useState(false);
   const [showSocialModal, setShowSocialModal] = useState(false);
   const [showChatbot, setShowChatbot] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  // Check authentication status on app load
+  useEffect(() => {
+    checkUser();
+  }, []);
+
+  const checkUser = async () => {
+    try {
+      const { user } = await supabaseService.getCurrentUser();
+      setUser(user);
+    } catch (error) {
+      console.error('Error checking user:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAuthSuccess = () => {
+    checkUser();
+  };
+
+  const handleSignOut = () => {
+    setUser(null);
+    setActiveTab('landing');
+  };
 
   // Combine default products with custom uploaded glasses
   const allProducts = [...glassesProducts, ...customGlasses];
@@ -104,10 +134,41 @@ function App() {
     });
   }, []);
 
-  const handleScreenshot = useCallback((imageData: string) => {
+  const handleScreenshot = useCallback(async (imageData: string) => {
     setScreenshotData(imageData);
     setShowScreenshotModal(true);
-  }, []);
+
+    // Save try-on session to Supabase if user is logged in
+    if (user && selectedProduct) {
+      try {
+        // Convert base64 to file for upload
+        const base64Response = await fetch(imageData);
+        const blob = await base64Response.blob();
+        const file = new File([blob], `screenshot-${Date.now()}.png`, { type: 'image/png' });
+
+        // Upload screenshot
+        const { data: uploadData } = await supabaseService.uploadScreenshot(file, user.id);
+        
+        if (uploadData) {
+          // Save session data
+          await supabaseService.saveTryOnSession({
+            user_id: user.id,
+            glasses_id: selectedProduct.id,
+            screenshot_url: uploadData.path,
+            adjustments: adjustments,
+          });
+
+          // Track analytics event
+          await supabaseService.trackEvent('screenshot_taken', {
+            product_id: selectedProduct.id,
+            adjustments: adjustments,
+          });
+        }
+      } catch (error) {
+        console.error('Error saving session:', error);
+      }
+    }
+  }, [user, selectedProduct, adjustments]);
 
   const handleUpgrade = useCallback(() => {
     setIsPremium(true);
@@ -135,7 +196,31 @@ function App() {
     { id: 'social', label: 'Social', icon: Share2 },
     { id: 'features', label: 'Pro Features', icon: Zap },
     { id: 'premium', label: 'Premium', icon: Crown },
+    ...(user ? [{ id: 'profile', label: 'Profile', icon: User }] : []),
   ];
+
+  // Show loading screen
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-ocean-gradient flex items-center justify-center">
+        <div className="text-center">
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+            className="w-16 h-16 border-4 border-blue_green/30 rounded-full mx-auto mb-4"
+          >
+            <div className="w-16 h-16 border-4 border-transparent border-t-blue_green rounded-full animate-spin"></div>
+          </motion.div>
+          <p className="text-blue_green text-lg">Loading VirtualSpecs AI Pro...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show authentication if user is not logged in
+  if (!user) {
+    return <Auth onAuthSuccess={handleAuthSuccess} />;
+  }
 
   return (
     <div className="min-h-screen bg-ocean-gradient relative overflow-hidden">
@@ -171,7 +256,7 @@ function App() {
       </div>
 
       {/* Header */}
-      {activeTab !== 'landing' && (
+      {activeTab !== 'landing' && activeTab !== 'profile' && (
         <motion.header 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -398,6 +483,17 @@ function App() {
                 isPremium={isPremium}
                 onUpgrade={handleUpgrade}
               />
+            </motion.div>
+          )}
+
+          {activeTab === 'profile' && (
+            <motion.div
+              key="profile"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+            >
+              <UserProfile onSignOut={handleSignOut} />
             </motion.div>
           )}
         </AnimatePresence>
