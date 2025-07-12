@@ -31,6 +31,7 @@ function App() {
   const [screenshotData, setScreenshotData] = useState<string | null>(null);
   const [showScreenshotModal, setShowScreenshotModal] = useState(false);
   const [activeTab, setActiveTab] = useState<'landing' | 'tryOn' | 'features' | 'premium' | 'social' | 'insights' | 'profile'>('landing');
+  const [previousTab, setPreviousTab] = useState<'landing' | 'tryOn' | 'features' | 'premium' | 'social' | 'insights' | 'profile'>('landing');
   const [isPremium, setIsPremium] = useState(false);
   const [showSocialModal, setShowSocialModal] = useState(false);
   const [showChatbot, setShowChatbot] = useState(false);
@@ -316,7 +317,12 @@ function App() {
                     key={tab.id}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => setActiveTab(tab.id as any)}
+                    onClick={() => {
+                      if (tab.id !== 'profile') {
+                        setPreviousTab(activeTab);
+                      }
+                      setActiveTab(tab.id as any);
+                    }}
                     className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-ocean ${
                       activeTab === tab.id
                         ? 'bg-button-primary text-prussian_blue shadow-ocean'
@@ -493,7 +499,10 @@ function App() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
             >
-              <UserProfile onSignOut={handleSignOut} />
+              <UserProfile 
+                onSignOut={handleSignOut} 
+                onBack={() => setActiveTab(previousTab)}
+              />
             </motion.div>
           )}
         </AnimatePresence>

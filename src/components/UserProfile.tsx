@@ -12,15 +12,17 @@ import {
   Trash2,
   Edit3,
   Save,
-  X
+  X,
+  ArrowLeft
 } from 'lucide-react';
 import supabaseService, { TryOnSession, UserPreference } from '../services/supabase';
 
 interface UserProfileProps {
   onSignOut: () => void;
+  onBack?: () => void;
 }
 
-const UserProfile: React.FC<UserProfileProps> = ({ onSignOut }) => {
+const UserProfile: React.FC<UserProfileProps> = ({ onSignOut, onBack }) => {
   const [user, setUser] = useState<any>(null);
   const [sessions, setSessions] = useState<TryOnSession[]>([]);
   const [preferences, setPreferences] = useState<UserPreference | null>(null);
@@ -128,16 +130,27 @@ const UserProfile: React.FC<UserProfileProps> = ({ onSignOut }) => {
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <motion.div
+              {onBack && (
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={onBack}
+                  className="flex items-center space-x-2 px-3 py-2 bg-blue_green/10 hover:bg-blue_green/20 text-blue_green rounded-xl transition-colors"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  <span>Back</span>
+                </motion.button>
+              )}
+              {/* <motion.div
                 animate={{ rotate: [0, 360] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                 className="relative"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-selective_yellow to-ut_orange rounded-xl blur opacity-75"></div>
+              > */}
+                {/* <div className="absolute inset-0 bg-gradient-to-r from-selective_yellow to-ut_orange rounded-xl blur opacity-75"></div>
                 <div className="relative p-3 bg-gradient-to-r from-selective_yellow to-ut_orange rounded-xl shadow-ocean">
                   <User className="w-8 h-8 text-prussian_blue" />
-                </div>
-              </motion.div>
+                </div> */}
+              {/* </motion.div> */}
               <div>
                 <h1 className="text-2xl font-bold text-prussian_blue">User Profile</h1>
                 <p className="text-blue_green">{user?.email}</p>
