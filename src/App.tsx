@@ -219,9 +219,9 @@ function App() {
   }
 
   // Show authentication if user is not logged in
-  if (!user) {
-    return <Auth onAuthSuccess={handleAuthSuccess} />;
-  }
+  // if (!user) {
+  //   return <Auth onAuthSuccess={handleAuthSuccess} />;
+  // }
 
   return (
     <div className="min-h-screen bg-ocean-gradient relative overflow-hidden">
