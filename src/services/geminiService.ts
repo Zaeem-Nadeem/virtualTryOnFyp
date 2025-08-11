@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const API_KEY = 'AIzaSyBikLTAUMMBzpJFa31stXcwkBZsBnqu6HU';
+const API_KEY = import.meta.env.VITE_GEMINI_KEY
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 export interface FaceAnalysis {
