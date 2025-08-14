@@ -65,6 +65,7 @@ export class SupabaseService {
       email,
       password,
     });
+    console.log(data)
     return { data, error };
   }
 

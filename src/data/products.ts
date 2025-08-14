@@ -1,11 +1,22 @@
 import { GlassesProduct } from '../types';
 
+// Import all images properly for production builds
+import glassesImg from '../assets/images/glasses.png';
+import sunglassesImg from '../assets/images/sunglasses.png';
+import glassesOvalImg from '../assets/images/glassesOval.png';
+import shadesGlassesImg from '../assets/images/shadesGlasses.png';
+import sunglasses1Img from '../assets/images/sunglasses1.png';
+import sunglasses2Img from '../assets/images/sunglasses2.png';
+import sunglasses3Img from '../assets/images/sunglasses3.png';
+import sunglasses4Img from '../assets/images/sunglasses4.png';
+import googleImg from '../assets/images/google.png';
+
 export const glassesProducts: GlassesProduct[] = [
   {
     id: '1',
     name: 'Classic Round Glasses',
     price: 89.99,
-    image: '/src/assets/images/glasses.png',
+    image: glassesImg,
     description: 'Timeless round frame glasses perfect for everyday sophistication',
     category: 'Glasses',
     color: 'Black'
@@ -14,7 +25,7 @@ export const glassesProducts: GlassesProduct[] = [
     id: '2',
     name: 'Modern Sunglasses',
     price: 129.99,
-    image: '/src/assets/images/sunglasses.png',
+    image: sunglassesImg,
     description: 'Contemporary sunglasses with premium gradient lenses',
     category: 'Sunglasses',
     color: 'Black'
@@ -23,7 +34,7 @@ export const glassesProducts: GlassesProduct[] = [
     id: '8',
     name: 'Oval Elegance',
     price: 99.99,
-    image: '/src/assets/images/glassesOval.png',
+    image: glassesOvalImg,
     description: 'Elegant oval glasses for a refined look',
     category: 'Glasses',
     color: 'Black'
@@ -32,7 +43,7 @@ export const glassesProducts: GlassesProduct[] = [
     id: '9',
     name: 'Shades Supreme',
     price: 139.99,
-    image: '/src/assets/images/shadesGlasses.png',
+    image: shadesGlassesImg,
     description: 'Supreme shades for ultimate sun protection',
     category: 'Sunglasses',
     color: 'Black'
@@ -41,7 +52,7 @@ export const glassesProducts: GlassesProduct[] = [
     id: '10',
     name: 'Sunset Vibe',
     price: 129.99,
-    image: '/src/assets/images/sunglasses1.png',
+    image: sunglasses1Img,
     description: 'Trendy sunglasses for a vibrant lifestyle',
     category: 'Sunglasses',
     color: 'Brown'
@@ -50,7 +61,7 @@ export const glassesProducts: GlassesProduct[] = [
     id: '11',
     name: 'Urban Explorer',
     price: 134.99,
-    image: '/src/assets/images/sunglasses2.png',
+    image: sunglasses2Img,
     description: 'Perfect for city adventures and sunny days',
     category: 'Sunglasses',
     color: 'Black'
@@ -59,7 +70,7 @@ export const glassesProducts: GlassesProduct[] = [
     id: '12',
     name: 'Golden Hour',
     price: 149.99,
-    image: '/src/assets/images/sunglasses3.png',
+    image: sunglasses3Img,
     description: 'Golden frame sunglasses for a premium feel',
     category: 'Sunglasses',
     color: 'Gold'
@@ -68,7 +79,7 @@ export const glassesProducts: GlassesProduct[] = [
     id: '13',
     name: 'Bold Statement',
     price: 119.99,
-    image: '/src/assets/images/sunglasses4.png',
+    image: sunglasses4Img,
     description: 'Make a bold statement with these unique frames',
     category: 'Sunglasses',
     color: 'Black'
@@ -77,7 +88,7 @@ export const glassesProducts: GlassesProduct[] = [
     id: '17',
     name: 'Google Aviator',
     price: 199.99,
-    image: '/src/assets/images/google.png',
+    image: googleImg,
     description: 'Aviator sunglasses with a tech twist',
     category: 'Sunglasses',
     color: 'Gold'

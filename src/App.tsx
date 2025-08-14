@@ -212,16 +212,16 @@ function App() {
           >
             <div className="w-16 h-16 border-4 border-transparent border-t-blue_green rounded-full animate-spin"></div>
           </motion.div>
-          <p className="text-blue_green text-lg">Loading VirtualSpecs AI Pro...</p>
+          <p className="text-blue_green text-lg">Loading FitViz AI Pro...</p>
         </div>
       </div>
     );
   }
 
   // Show authentication if user is not logged in
-  if (!user) {
-    return <Auth onAuthSuccess={handleAuthSuccess} />;
-  }
+  // if (!user) {
+  //   return <Auth onAuthSuccess={handleAuthSuccess} />;
+  // }
 
   return (
     <div className="min-h-screen bg-ocean-gradient relative overflow-hidden">

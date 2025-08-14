@@ -149,7 +149,7 @@ const VirtualTryOn: React.FC<VirtualTryOnProps> = ({ glassesImage, adjustments, 
           const offsetX = 0.00 + adjustments.offsetX;
           const offsetY = -0.01 + adjustments.offsetY;
 
-          // Glasses positioning
+          // Glasses positioningnpm r
           glassesMesh.position.x = (eyeCenter[0] - video.videoWidth / 2) * scaleX + offsetX;
           glassesMesh.position.y = (eyeCenter[1] - video.videoHeight / 2) * scaleY + offsetY;
           glassesMesh.scale.set(scaleMultiplier, scaleMultiplier, scaleMultiplier);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Eye, EyeOff, Mail, Lock, User, Loader2, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Eye, EyeOff, Mail, Lock, User, Loader2 } from 'lucide-react';
 import supabaseService from '../services/supabase';
 
 interface AuthProps {
@@ -33,6 +33,7 @@ const Auth: React.FC<AuthProps> = ({ onAuthSuccess }) => {
         onAuthSuccess();
       }
     } catch (error: any) {
+      console.log("helo")
       setError(error.message);
     } finally {
       setLoading(false);
@@ -64,7 +65,7 @@ const Auth: React.FC<AuthProps> = ({ onAuthSuccess }) => {
             </div>
           </motion.div> */}
           <h1 className="text-3xl font-bold animate-gradient-ocean mb-2">
-            VirtualSpecs AI Pro
+            FitViz AI Pro
           </h1>
           <p className="text-blue_green">
             {isSignUp ? 'Create your account' : 'Welcome back'}
@@ -85,6 +86,7 @@ const Auth: React.FC<AuthProps> = ({ onAuthSuccess }) => {
                 <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-blue_green" />
                 <input
                   type="text"
+                  autoComplete="email"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 bg-white/10 border border-sky_blue/20 rounded-xl text-prussian_blue placeholder-blue_green/60 focus:outline-none focus:ring-2 focus:ring-blue_green/50 focus:border-transparent backdrop-blur-sm"
@@ -103,6 +105,7 @@ const Auth: React.FC<AuthProps> = ({ onAuthSuccess }) => {
               <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-blue_green" />
               <input
                 type="email"
+                autoComplete=''
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 bg-white/10 border border-sky_blue/20 rounded-xl text-prussian_blue placeholder-blue_green/60 focus:outline-none focus:ring-2 focus:ring-blue_green/50 focus:border-transparent backdrop-blur-sm"
