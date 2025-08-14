@@ -160,7 +160,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center space-x-2"
           >
-            <img src={fitVizLogo} className='w-10'/>
+            {/* <img src={fitVizLogo} className='w-10'/> */}
             <Glasses className="w-8 h-8 text-professional-deep-lavender" />
             <span className="text-2xl font-bold bg-clip-text  text-black from-professional-medium-lavender to-professional-deep-lavender ">
               FitViz
