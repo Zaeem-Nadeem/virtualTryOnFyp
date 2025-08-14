@@ -283,7 +283,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
       {/* Hero Section */}
       <section className="relative z-10 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8" id="home">
   <div className="max-w-7xl mx-auto">
-    <div className="flex flex-col md:flex-row items-center">
+    <div className="flex flex-col md:flex-row items-start">
       {/* Text Content */}
       <div className="w-full md:w-1/2 md:pr-12 text-center md:text-left">
         <motion.div
@@ -469,7 +469,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
           {/* 3D Model Visualization */}
           <div className="relative h-64 sm:h-80 md:h-96 lg:h-screen mx-auto w-full max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-4xl">
             {/* Dragon Ball Master 3D Model */}
-            <div className="relative w-full h-full flex items-center justify-center">
+            <div className="relative w-full h-full flex justify-start">
               <div className="w-full h-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-2xl max-h-xs sm:max-h-sm md:max-h-md lg:max-h-2xl">
                 <ModelViewer 
                   modelPath="/dragon_ball_master_roshi_pixelvoxel_art.glb"

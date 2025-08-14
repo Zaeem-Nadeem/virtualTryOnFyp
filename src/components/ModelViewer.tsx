@@ -24,7 +24,7 @@ function Model({ url }: { url: string }) {
         const size = box.getSize(new THREE.Vector3());
         
         const maxDim = Math.max(size.x, size.y, size.z);
-        const scale = 4 / maxDim; // Increased scale from 2 to 4 for bigger model
+                 const scale = 6 / maxDim; // Reduced scale to prevent cutting off
         
         gltf.scene.position.sub(center);
         gltf.scene.scale.setScalar(scale);
@@ -34,13 +34,13 @@ function Model({ url }: { url: string }) {
     }
   }, [gltf]);
 
-  return (
-    <primitive 
-      ref={modelRef}
-      object={gltf.scene} 
-      position={[0, 0, 0]}
-    />
-  );
+           return (
+           <primitive 
+             ref={modelRef}
+             object={gltf.scene} 
+             position={[0, 2, 0]}
+           />
+         );
 }
 
 interface ModelViewerProps {
