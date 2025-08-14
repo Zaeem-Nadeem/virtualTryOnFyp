@@ -297,78 +297,42 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
               <span className="text-professional-deep-lavender font-medium">Powered by Advanced AI Technology</span>
             </motion.div>
 
-            <motion.h1 
+            {/* Professional Virtual Try-On Button */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-5xl md:text-7xl font-bold mb-8"
+              transition={{ delay: 0.5 }}
+              className="flex justify-center mb-12"
             >
-              <span className="animate-gradient-professional">
-                Try On Glasses
-              </span>
-              <br />
-              <span className="text-professional-deep-lavender">
-                Virtually
-              </span>
-            </motion.h1>
-            
-            {/* Highlight text */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4 }}
-              className="text-center mb-6"
-            >
-              <motion.div
-                animate={{ 
-                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-professional-light-lavender via-professional-medium-lavender to-professional-light-lavender bg-[length:200%_100%]"
+              <motion.button
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={onGetStarted}
+                className="group relative bg-gradient-to-r from-professional-button to-professional-button-hover text-professional-cream px-8 sm:px-10 py-4 sm:py-5 rounded-2xl font-bold text-lg sm:text-xl transition-all duration-300 shadow-professional-lg hover:shadow-professional-xl border border-professional-cream/20"
               >
-                <motion.div
-                  animate={{ rotate: [0, 360] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                >
-                  <Zap className="w-4 h-4 text-professional-deep-lavender" />
-                </motion.div>
-                <span className="text-professional-deep-lavender font-semibold text-sm">
-                  AI-Powered • Real-Time • 99.9% Accurate
-                </span>
-              </motion.div>
+                {/* Subtle glow effect */}
+                <div className="absolute inset-0 bg-professional-button rounded-2xl blur opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
+                
+                {/* Button content */}
+                <div className="relative flex items-center space-x-3">
+                  <Camera className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <span>Start Virtual Try-On</span>
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:w-5 group-hover:translate-x-1 transition-transform duration-200" />
+                </div>
+              </motion.button>
             </motion.div>
 
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-xl md:text-2xl text-professional-medium-lavender max-w-4xl mx-auto mb-8 leading-relaxed"
+              className="text-2xl md:text-3xl lg:text-4xl text-professional-deep-lavender max-w-5xl mx-auto mb-12 leading-relaxed font-semibold text-center"
             >
-              Experience the future of eyewear shopping with our AI-powered virtual try-on technology. 
-              See how any glasses look on you in real-time with perfect accuracy.
+              Transform your eyewear shopping experience with cutting-edge AI technology that lets you 
+              <span className="text-professional-medium-lavender font-bold"> try on any glasses instantly</span> and see exactly how they look on your face!
             </motion.p>
             
-            {/* Scroll indicator */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.7 }}
-              className="flex justify-center mb-8"
-            >
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="flex flex-col items-center space-y-2 text-professional-medium-lavender"
-              >
-                <span className="text-sm font-medium">Scroll to explore</span>
-                <motion.div
-                  animate={{ y: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <ArrowRight className="w-4 h-4 rotate-90" />
-                </motion.div>
-              </motion.div>
-            </motion.div>
+
 
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -458,36 +422,45 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
             </motion.div>
           </motion.div>
           
-          {/* Floating hint for virtual try-on button */}
+          {/* Enhanced floating hint for virtual try-on button */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ delay: 3, type: "spring", stiffness: 200 }}
+            transition={{ delay: 2, type: "spring", stiffness: 200 }}
             className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
           >
             <motion.div
               animate={{ 
-                y: [0, -5, 0],
-                scale: [1, 1.05, 1]
+                y: [0, -8, 0],
+                scale: [1, 1.08, 1],
+                rotate: [0, 2, -2, 0]
               }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="glass-card border-professional rounded-2xl px-6 py-3 shadow-professional-lg"
+              transition={{ duration: 3, repeat: Infinity }}
+              className="glass-card border-2 border-professional-medium-lavender rounded-3xl px-8 py-4 shadow-professional-xl bg-professional-card/80 backdrop-blur-sm"
             >
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-4">
                 <motion.div
-                  animate={{ rotate: [0, 15, -15, 0] }}
+                  animate={{ 
+                    rotate: [0, 20, -20, 0],
+                    scale: [1, 1.2, 1]
+                  }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
-                  <Sparkles className="w-5 h-5 text-professional-medium-lavender" />
+                  <Sparkles className="w-6 h-6 text-professional-medium-lavender" />
                 </motion.div>
-                <span className="text-professional-deep-lavender font-medium text-sm">
-                  ✨ Try on glasses virtually with AI!
-                </span>
+                <div className="text-center">
+                  <span className="text-professional-deep-lavender font-bold text-base block">
+                    🚀 Ready to transform your look?
+                  </span>
+                  <span className="text-professional-medium-lavender text-sm block mt-1">
+                    Click the button above to start!
+                  </span>
+                </div>
                 <motion.div
-                  animate={{ x: [0, 3, 0] }}
+                  animate={{ x: [0, 5, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
                 >
-                  <ArrowRight className="w-4 h-4 text-professional-medium-lavender" />
+                  <ArrowRight className="w-5 h-5 text-professional-medium-lavender" />
                 </motion.div>
               </div>
             </motion.div>
