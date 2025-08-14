@@ -311,46 +311,185 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
                 Virtually
               </span>
             </motion.h1>
+            
+            {/* Highlight text */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4 }}
+              className="text-center mb-6"
+            >
+              <motion.div
+                animate={{ 
+                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-professional-light-lavender via-professional-medium-lavender to-professional-light-lavender bg-[length:200%_100%]"
+              >
+                <motion.div
+                  animate={{ rotate: [0, 360] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                >
+                  <Zap className="w-4 h-4 text-professional-deep-lavender" />
+                </motion.div>
+                <span className="text-professional-deep-lavender font-semibold text-sm">
+                  AI-Powered • Real-Time • 99.9% Accurate
+                </span>
+              </motion.div>
+            </motion.div>
 
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-xl md:text-2xl text-professional-medium-lavender max-w-4xl mx-auto mb-12 leading-relaxed"
+              className="text-xl md:text-2xl text-professional-medium-lavender max-w-4xl mx-auto mb-8 leading-relaxed"
             >
               Experience the future of eyewear shopping with our AI-powered virtual try-on technology. 
               See how any glasses look on you in real-time with perfect accuracy.
             </motion.p>
+            
+            {/* Scroll indicator */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7 }}
+              className="flex justify-center mb-8"
+            >
+              <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="flex flex-col items-center space-y-2 text-professional-medium-lavender"
+              >
+                <span className="text-sm font-medium">Scroll to explore</span>
+                <motion.div
+                  animate={{ y: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ArrowRight className="w-4 h-4 rotate-90" />
+                </motion.div>
+              </motion.div>
+            </motion.div>
 
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6"
+              className="flex flex-col sm:flex-row items-center justify-center space-y-6 sm:space-y-0 sm:space-x-8"
             >
-              <motion.button
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={onGetStarted}
-                className="group relative bg-professional-button hover:bg-professional-button-hover text-professional-cream px-8 py-4 rounded-2xl font-bold text-lg transition-professional shadow-professional-xl hover:shadow-glow-professional"
+              {/* Main CTA Button - Virtual Try-On */}
+              <motion.div
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
+                className="relative"
               >
-                <div className="absolute inset-0 bg-professional-button rounded-2xl blur opacity-75 group-hover:opacity-100 transition-opacity"></div>
-                <div className="relative flex items-center space-x-3">
-                  <Camera className="w-6 h-6" />
-                  <span>Start Virtual Try-On</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </motion.button>
+                {/* Glowing background effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-professional-medium-lavender via-professional-deep-lavender to-professional-medium-lavender rounded-3xl blur-xl opacity-60 animate-pulse"></div>
+                
+                {/* Main button */}
+                <motion.button
+                  whileHover={{ scale: 1.08, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={onGetStarted}
+                  className="group relative bg-gradient-to-r from-professional-button via-professional-button-hover to-professional-button text-professional-cream px-10 sm:px-12 py-5 sm:py-6 rounded-3xl font-bold text-xl sm:text-2xl transition-all duration-300 shadow-2xl hover:shadow-glow-professional border-2 border-professional-cream/20"
+                >
+                  {/* Animated background */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-professional-button to-professional-button-hover rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Button content */}
+                  <div className="relative flex items-center space-x-4">
+                    <motion.div
+                      animate={{ 
+                        rotate: [0, 10, -10, 0],
+                        scale: [1, 1.1, 1]
+                      }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                      className="relative"
+                    >
+                      <div className="absolute inset-0 bg-professional-cream/20 rounded-full blur"></div>
+                      <Camera className="w-7 h-7 sm:w-8 sm:h-8 relative z-10" />
+                    </motion.div>
+                    <span className="font-extrabold tracking-wide">Start Virtual Try-On</span>
+                    <motion.div
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      <ArrowRight className="w-6 h-6 sm:w-7 sm:h-7 group-hover:translate-x-2 transition-transform duration-300" />
+                    </motion.div>
+                  </div>
+                  
+                  {/* Floating sparkles */}
+                  <motion.div
+                    animate={{ 
+                      y: [0, -10, 0],
+                      opacity: [0.5, 1, 0.5],
+                      rotate: [0, 180, 360]
+                    }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                    className="absolute -top-2 -right-2"
+                  >
+                    <Sparkles className="w-5 h-5 text-professional-cream/80" />
+                  </motion.div>
+                </motion.button>
+                
+                {/* Call-to-action text below button */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 }}
+                  className="text-center mt-4"
+                >
+                  <p className="text-professional-medium-lavender text-sm sm:text-base font-medium">
+                    🎯 Click to experience AI-powered virtual try-on
+                  </p>
+                </motion.div>
+              </motion.div>
 
+              {/* Secondary button - Watch Demo */}
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setShowVideo(true)}
-                className="flex items-center space-x-3 glass-card border-professional text-professional-deep-lavender px-6 py-4 rounded-2xl font-medium transition-professional"
+                className="flex items-center space-x-3 glass-card border-professional text-professional-deep-lavender px-6 py-4 rounded-2xl font-medium transition-professional hover:bg-professional-card/50"
               >
                 <Play className="w-5 h-5" />
                 <span>Watch Demo</span>
               </motion.button>
+            </motion.div>
+          </motion.div>
+          
+          {/* Floating hint for virtual try-on button */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ delay: 3, type: "spring", stiffness: 200 }}
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
+          >
+            <motion.div
+              animate={{ 
+                y: [0, -5, 0],
+                scale: [1, 1.05, 1]
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="glass-card border-professional rounded-2xl px-6 py-3 shadow-professional-lg"
+            >
+              <div className="flex items-center space-x-3">
+                <motion.div
+                  animate={{ rotate: [0, 15, -15, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <Sparkles className="w-5 h-5 text-professional-medium-lavender" />
+                </motion.div>
+                <span className="text-professional-deep-lavender font-medium text-sm">
+                  ✨ Try on glasses virtually with AI!
+                </span>
+                <motion.div
+                  animate={{ x: [0, 3, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ArrowRight className="w-4 h-4 text-professional-medium-lavender" />
+                </motion.div>
+              </div>
             </motion.div>
           </motion.div>
         </div>
