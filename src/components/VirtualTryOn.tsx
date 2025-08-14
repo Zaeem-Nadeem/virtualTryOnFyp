@@ -263,49 +263,49 @@ const VirtualTryOn: React.FC<VirtualTryOnProps> = ({ glassesImage, adjustments, 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="glass-card rounded-3xl border-sky_blue/20 overflow-hidden shadow-ocean-xl"
+      className="glass-card rounded-2xl sm:rounded-3xl border-sky_blue/20 overflow-hidden shadow-ocean-xl mx-2 sm:mx-0"
     >
       {/* Header */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="bg-ocean-card border-b border-sky_blue/20 p-6"
+        className="bg-ocean-card border-b border-sky_blue/20 p-4 sm:p-6"
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+          <div className="flex items-center space-x-3 sm:space-x-4">
             <motion.div 
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              className="relative"
+              className="relative flex-shrink-0"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-selective_yellow to-ut_orange rounded-xl blur opacity-75"></div>
-              <div className="relative p-3 bg-gradient-to-r from-selective_yellow to-ut_orange rounded-xl shadow-ocean">
-                <Zap className="w-6 h-6 text-prussian_blue" />
+              <div className="relative p-2 sm:p-3 bg-gradient-to-r from-selective_yellow to-ut_orange rounded-xl shadow-ocean">
+                <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-prussian_blue" />
               </div>
             </motion.div>
-            <div>
-              <h1 className="text-2xl font-bold text-sky_blue">
+            <div className="min-w-0 flex-1">
+              <h1 className="text-xl sm:text-2xl font-bold text-sky_blue leading-tight">
                 AI Virtual Try-On
               </h1>
-              <p className="text-sm text-blue_green">Real-time face tracking & AR overlay</p>
+              <p className="text-xs sm:text-sm text-blue_green mt-1">Real-time face tracking & AR overlay</p>
             </div>
           </div>
           
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center justify-center sm:justify-end">
             <motion.div 
               animate={{ scale: [1, 1.1, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="flex items-center space-x-2 px-4 py-2 bg-green-500/20 rounded-full border border-green-500/30"
+              className="flex items-center space-x-2 px-3 sm:px-4 py-2 bg-green-500/20 rounded-full border border-green-500/30"
             >
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-sm text-green-300 font-medium">Live</span>
+              <span className="text-xs sm:text-sm text-green-300 font-medium">Live</span>
             </motion.div>
           </div>
         </div>
       </motion.div>
       
-      <div className="relative mx-auto" style={{ width: '100%', maxWidth: '800px', aspectRatio: '1' }}>
+      <div className="relative mx-auto w-full max-w-full sm:max-w-[600px] lg:max-w-[800px]" style={{ aspectRatio: '1' }}>
         <AnimatePresence>
           {isLoading && (
             <motion.div 
@@ -315,22 +315,22 @@ const VirtualTryOn: React.FC<VirtualTryOnProps> = ({ glassesImage, adjustments, 
               className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-10"
             >
               <div className="text-center">
-                <motion.div 
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                  className="relative mb-6"
-                >
-                  <div className="w-20 h-20 border-4 border-blue_green/30 rounded-full"></div>
-                  <div className="absolute inset-0 w-20 h-20 border-4 border-transparent border-t-blue_green rounded-full animate-spin"></div>
-                </motion.div>
-                <motion.div 
-                  animate={{ opacity: [0.5, 1, 0.5] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  className="text-sky_blue font-medium text-lg"
-                >
-                  Initializing AI Model...
-                </motion.div>
-                <div className="text-blue_green text-sm mt-2">Please allow camera access</div>
+                            <motion.div 
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              className="relative mb-4 sm:mb-6"
+            >
+              <div className="w-16 h-16 sm:w-20 sm:h-20 border-4 border-blue_green/30 rounded-full"></div>
+              <div className="absolute inset-0 w-16 h-16 sm:w-20 sm:h-20 border-4 border-transparent border-t-blue_green rounded-full animate-spin"></div>
+            </motion.div>
+            <motion.div 
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="text-sky_blue font-medium text-base sm:text-lg px-4"
+            >
+              Initializing AI Model...
+            </motion.div>
+            <div className="text-blue_green text-xs sm:text-sm mt-2 px-4">Please allow camera access</div>
               </div>
             </motion.div>
           )}
@@ -361,7 +361,7 @@ const VirtualTryOn: React.FC<VirtualTryOnProps> = ({ glassesImage, adjustments, 
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.5 }}
-          className="absolute bottom-8 right-8 flex items-center space-x-4"
+          className="absolute bottom-4 sm:bottom-8 right-4 sm:right-8 flex items-center space-x-2 sm:space-x-4"
         >
           <motion.button
             whileHover={{ scale: 1.1 }}
@@ -371,11 +371,11 @@ const VirtualTryOn: React.FC<VirtualTryOnProps> = ({ glassesImage, adjustments, 
             className="relative group"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-selective_yellow to-ut_orange rounded-full blur opacity-75 group-hover:opacity-100 transition-opacity"></div>
-            <div className="relative bg-gradient-to-r from-selective_yellow to-ut_orange hover:from-ut_orange hover:to-selective_yellow text-prussian_blue p-4 rounded-full shadow-ocean-xl transition-all duration-200">
+            <div className="relative bg-gradient-to-r from-selective_yellow to-ut_orange hover:from-ut_orange hover:to-selective_yellow text-prussian_blue p-3 sm:p-4 rounded-full shadow-ocean-xl transition-all duration-200">
               {isCapturing ? (
-                <Loader2 className="w-6 h-6 animate-spin" />
+                <Loader2 className="w-5 h-5 sm:w-6 sm:h-6 animate-spin" />
               ) : (
-                <Camera className="w-6 h-6" />
+                <Camera className="w-5 h-5 sm:w-6 sm:h-6" />
               )}
             </div>
           </motion.button>
@@ -386,12 +386,12 @@ const VirtualTryOn: React.FC<VirtualTryOnProps> = ({ glassesImage, adjustments, 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="absolute inset-4 pointer-events-none"
+          className="absolute inset-2 sm:inset-4 pointer-events-none"
         >
-          <div className="absolute top-0 left-0 w-8 h-8 border-l-3 border-t-3 border-blue_green rounded-tl-xl"></div>
-          <div className="absolute top-0 right-0 w-8 h-8 border-r-3 border-t-3 border-blue_green rounded-tr-xl"></div>
-          <div className="absolute bottom-0 left-0 w-8 h-8 border-l-3 border-b-3 border-blue_green rounded-bl-xl"></div>
-          <div className="absolute bottom-0 right-20 w-8 h-8 border-r-3 border-b-3 border-blue_green rounded-br-xl"></div>
+          <div className="absolute top-0 left-0 w-6 h-6 sm:w-8 sm:h-8 border-l-2 sm:border-l-3 border-t-2 sm:border-t-3 border-blue_green rounded-tl-lg sm:rounded-tl-xl"></div>
+          <div className="absolute top-0 right-0 w-6 h-6 sm:w-8 sm:h-8 border-r-2 sm:border-r-3 border-t-2 sm:border-t-3 border-blue_green rounded-tr-lg sm:rounded-tr-xl"></div>
+          <div className="absolute bottom-0 left-0 w-6 h-6 sm:w-8 sm:h-8 border-l-2 sm:border-l-3 border-b-2 sm:border-b-3 border-blue_green rounded-bl-lg sm:rounded-bl-xl"></div>
+          <div className="absolute bottom-0 right-16 sm:right-20 w-6 h-6 sm:w-8 sm:h-8 border-r-2 sm:border-r-3 border-b-2 sm:border-b-3 border-blue_green rounded-br-lg sm:rounded-br-xl"></div>
         </motion.div>
 
         {/* Capture Flash Effect */}

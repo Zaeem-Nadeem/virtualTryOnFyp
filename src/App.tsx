@@ -263,34 +263,34 @@ function App() {
           animate={{ opacity: 1, y: 0 }}
           className="relative z-10 glass-card border-b border-ocean sticky top-0"
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-20">
+          <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between h-auto sm:h-20 py-4 sm:py-0 space-y-4 sm:space-y-0">
               <motion.div 
                 whileHover={{ scale: 1.05 }}
-                className="flex items-center space-x-4"
+                className="flex items-center space-x-3 sm:space-x-4"
               >
                 <motion.div 
                   animate={{ rotate: [0, 360] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                  className="relative"
+                  className="relative flex-shrink-0"
                 >
                   <div className="absolute inset-0 bg-button-primary rounded-xl blur opacity-75"></div>
-                  <div className="relative p-3 bg-button-primary rounded-xl shadow-ocean">
-                    <Glasses className="w-8 h-8 text-prussian_blue" />
+                  <div className="relative p-2 sm:p-3 bg-button-primary rounded-xl shadow-ocean">
+                    <Glasses className="w-6 h-6 sm:w-8 sm:h-8 text-prussian_blue" />
                   </div>
                 </motion.div>
-                <div>
-                  <h1 className="text-3xl font-bold animate-gradient-ocean">
+                <div className="min-w-0 flex-1">
+                  <h1 className="text-2xl sm:text-3xl font-bold animate-gradient-ocean leading-tight">
                     VirtualSpecs AI Pro
                   </h1>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 mt-1">
                     <motion.div
                       animate={{ rotate: [0, 360] }}
                       transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                     >
-                      <Sparkles className="w-4 h-4 text-blue_green" />
+                      <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-blue_green" />
                     </motion.div>
-                    <p className="text-sm text-prussian_blue">Enterprise Virtual Try-On Platform</p>
+                    <p className="text-xs sm:text-sm text-prussian_blue">Enterprise Virtual Try-On Platform</p>
                     {isPremium && (
                       <motion.div
                         animate={{ scale: [1, 1.1, 1] }}
@@ -310,7 +310,7 @@ function App() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 }}
-                className="flex items-center space-x-2"
+                className="flex items-center space-x-1 sm:space-x-2 overflow-x-auto pb-2 sm:pb-0 -mx-3 sm:mx-0 px-3 sm:px-0"
               >
                 {tabs.map((tab) => (
                   <motion.button
@@ -323,14 +323,14 @@ function App() {
                       }
                       setActiveTab(tab.id as any);
                     }}
-                    className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-ocean ${
+                    className={`flex items-center justify-center space-x-1 sm:space-x-2 px-3 sm:px-4 py-2.5 sm:py-2 rounded-lg sm:rounded-xl transition-ocean flex-shrink-0 ${
                       activeTab === tab.id
                         ? 'bg-button-primary text-prussian_blue shadow-ocean'
                         : 'glass-card text-prussian_blue hover:bg-ocean-card hover:text-blue_green'
                     }`}
                   >
-                    <tab.icon className="w-4 h-4" />
-                    <span className="text-sm font-medium hidden sm:block">{tab.label}</span>
+                    <tab.icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="text-xs sm:text-sm font-medium hidden xs:block">{tab.label}</span>
                   </motion.button>
                 ))}
               </motion.div>
@@ -515,11 +515,11 @@ function App() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setShowChatbot(true)}
-        className="fixed bottom-6 left-6 z-40 group"
+        className="fixed bottom-4 sm:bottom-6 left-4 sm:left-6 z-40 group"
       >
         <div className="absolute inset-0 bg-gradient-to-r from-selective_yellow to-ut_orange rounded-full blur opacity-75 group-hover:opacity-100 transition-opacity"></div>
-        <div className="relative bg-gradient-to-r from-selective_yellow to-ut_orange hover:from-ut_orange hover:to-selective_yellow text-prussian_blue p-4 rounded-full shadow-ocean-xl transition-all duration-200">
-          <MessageCircle className="w-6 h-6" />
+        <div className="relative bg-gradient-to-r from-selective_yellow to-ut_orange hover:from-ut_orange hover:to-selective_yellow text-prussian_blue p-3 sm:p-4 rounded-full shadow-ocean-xl transition-all duration-200">
+          <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
         </div>
         <motion.div
           animate={{ scale: [1, 1.2, 1] }}
